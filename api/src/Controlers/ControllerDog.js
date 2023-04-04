@@ -2,6 +2,7 @@ const axios = require('axios');
 const { API_KEY } = process.env;
 const { Dog, Temperament } = require('../db.js');
 
+//Pido la info a la API
 const getApiInfo = async function () {
 	const urlAPI = await axios.get(`https://api.thedogapi.com/v1/breeds?api_key=${API_KEY}`);
 	const infoAPI = await urlAPI.data.map((el) => {
@@ -22,3 +23,11 @@ const getApiInfo = async function () {
 	return infoAPI;
 };
 
+//Guardo temperamentos en la base de datos
+const getInfoDB = async function () {
+	return await Dog.findAll({
+		include: {
+			model: Temperament,
+		},
+	});
+};
