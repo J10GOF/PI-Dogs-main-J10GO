@@ -23,11 +23,39 @@ const getApiInfo = async function () {
 	return infoAPI;
 };
 
-//Guardo temperamentos en la base de datos
+//Buscar en DB
 const getInfoDB = async function () {
 	return await Dog.findAll({
 		include: {
 			model: Temperament,
 		},
 	});
+};
+
+//Combino la información obtenida de una API y una base de datos local para obtener información completa sobre una lista de razas de perros
+const getAllInfo = async function () {
+	const apiInfoAll = await getApiInfo();
+	let dbInfoAll = await getInfoDB();
+	dbInfoAll = await dbInfoAll.map((el) => {
+		return {
+			id: el.id,
+			name: el.name,
+			heightMin: el.heightMin,
+			heightMax: el.heightMax,
+			weightMin: el.weightMin,
+			weightMax: el.weightMax,
+			life_span: el.life_span,
+			image: el.image ? el.image : "https://static.vecteezy.com/system/resources/previews/011/480/580/original/a-labrador-or-golden-retriever-dog-with-a-question-mark-dog-question-an-uncomprehending-dog-with-its-head-tilted-pet-illustration-vector.jpg",
+			temperament: el.temperament.map((el) => {
+				return el.name;
+			}).join(", "),
+		};
+	});
+	const allInfo = apiInfoAll.concat(dbInfoAll);
+	return allInfo;
+};
+
+module.exports = {
+	getAllInfo,
+	getInfoDB,
 };
