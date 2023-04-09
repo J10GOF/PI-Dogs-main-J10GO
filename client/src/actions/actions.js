@@ -27,7 +27,24 @@ export function orderByWeight(payload) {
 export function createdInDb(payload) {
   console.log(payload);
   return {
-    type: "CREATED_IN_DB",
+    type: "ORDER_BY_CREATION",
+    payload,
+  };
+}
+
+export function getTemperaments() {
+  return async function (dispatch) {
+    let temperaments = await axios.get("http://localhost:3001/temperaments");
+    return dispatch({
+      type: "GET_TEMPERAMENTS",
+      payload: temperaments.data,
+    });
+  };
+}
+
+export function filteredByTemperament(payload) {
+  return {
+    type: "FILTERED_BY_TEMP",
     payload,
   };
 }

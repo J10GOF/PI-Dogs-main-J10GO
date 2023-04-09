@@ -32,7 +32,7 @@ const getInfoDB = async function () {
 	});
 };
 
-//Combino la información obtenida de una API y una base de datos local para obtener información completa sobre una lista de razas de perros
+//Combino la información obtenida la API y de la DB para obtener información completa sobre una lista de razas de perros
 const getAllInfo = async function () {
 	const apiInfoAll = await getApiInfo();
 	let dbInfoAll = await getInfoDB();
