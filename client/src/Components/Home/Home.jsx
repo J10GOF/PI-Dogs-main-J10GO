@@ -11,6 +11,9 @@ import {
 import { Link } from "react-router-dom";
 import Card from "../Card/Card.jsx";
 import Paginated from "../Paginado/Paginado.jsx";
+import SearchBar from '../SearchBar/SearchBar.jsx';
+import Style from './Home.module.css';
+
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -28,6 +31,7 @@ export default function Home() {
   };
 
   function handleTemperament(e) {
+    e.preventDefault();
     dispatch(filteredByTemperament(e.target.value));
     setCurrentPage(1);
     setOrder(e.target.value);
@@ -46,15 +50,15 @@ export default function Home() {
   function handerSortAlphabetically(e) {
     e.preventDefault();
     dispatch(orderAlphabetically(e.target.value));
-    setCurrentPage(1);
     setOrder(e.target.value);
+    setCurrentPage(1);
   }
 
   function handleSortWeight(e) {
     e.preventDefault();
     dispatch(orderByWeight(e.target.value));
-    setCurrentPage(1);
     setOrder(e.target.value);
+    setCurrentPage(1);
   }
 
   function handleCreatedDb(e) {
@@ -80,13 +84,13 @@ export default function Home() {
       </button>
 
       <div>
-        <select onChange={(e) => handerSortAlphabetically(e)}>
-          <option>Orden Alfebetico</option>
+        <select onChange={(e) => handerSortAlphabetically(e)} value="disabled">
+          <option value="">Orden Alfebetico</option>
           <option value="ascendente">A to Z</option>
           <option value="descendente">Z to A</option>
         </select>
 
-        <select onChange={(e) => handleSortWeight(e)}>
+        <select onChange={(e) => handleSortWeight(e)} value="disabled">
           <option>Order by weight</option>
           <option value="weightMin">Min weight</option>
           <option value="weightMax">Max weight</option>
@@ -96,6 +100,7 @@ export default function Home() {
           onChange={(e) => {
             handleTemperament(e);
           }}
+          value="disabled"
         >
           <option>Temperamentos</option>
           {allTemperaments &&
@@ -106,35 +111,41 @@ export default function Home() {
             ))}
         </select>
 
-        <select onChange={(e) => handleCreatedDb(e)}>
-          <option>App</option>
+        <select onChange={(e) => handleCreatedDb(e)} value="disabled">
+          <option value="">App</option>
           <option value="apiDogs">Dogs API</option>
           <option value="dbDogs">Dogs DB</option>
         </select>
 
       </div>
+
+      <SearchBar/>
+
       <Paginated
         dogsPerPage={dogsPerPage}
         allDogs={allDogs.length}
         paginated={paginated}
       />
-      {currentDogs?.map((el) => {
-        return (
-          <div key={el.id}>
-            <Link to={"/home/" + el.id}>
-              <Card
-                key={el.id}
-                id={el.id}
-                name={el.name}
-                image={el.image}
-                weightMin={el.weightMin}
-                weightMax={el.weightMax}
-                temperament={el.temperament}
-              />
-            </Link>
-          </div>
-        );
-      })}
+
+      <div className={Style.cardsConteiner}>
+        {currentDogs?.map((el) => {
+          return (
+            <div key={el.id}>
+              <Link to={"/home/" + el.id}>
+                <Card
+                  key={el.id}
+                  id={el.id}
+                  name={el.name}
+                  image={el.image}
+                  weightMin={el.weightMin}
+                  weightMax={el.weightMax}
+                  temperament={el.temperament}
+                />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
