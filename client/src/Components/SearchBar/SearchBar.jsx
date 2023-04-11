@@ -25,7 +25,7 @@ export default function SearchBar() {
       <input
         value={name}
         type="text"
-        placeholder="Search Dogs"
+        placeholder="Buscar Perros"
         onChange={(e) => handleInputChange(e)}
       />
       <button type="submit" onClick={(e) => handleSubmit(e)}>
