@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getTemperaments, getCreatedDogs } from "../../actions/actions.js";
+import style from './CrearDog.module.css'
 
 export default function CreatedDog() {
   const dispatch = useDispatch();
@@ -28,6 +29,12 @@ export default function CreatedDog() {
       ...input,
       [e.target.name]: e.target.value,
     });
+    setErrors(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
 
   function handleSubmit(e) {
@@ -69,11 +76,10 @@ export default function CreatedDog() {
       <Link to="/home">
         <button>Regresar</button>
       </Link>
-      <h1>Crear un perro nuevo</h1>
+      <h1>CREA TU PROPIO PERRO</h1>
       <form onSubmit={(e) => handleSubmit(e)}>
         <div>
-          <label>
-            Nombre -
+          <label>Nombre: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -81,12 +87,13 @@ export default function CreatedDog() {
               value={input.name}
               required
             />
-          </label>
+          <span className={style.validation}>
+            {errors.name && <p>{errors.name}</p>}
+          </span>
         </div>
 
         <div>
-          <label>
-            Altura mínima -
+          <label>Altura mínima: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -94,12 +101,13 @@ export default function CreatedDog() {
               value={input.heightMin}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.heightMin && <p>{errors.heightMin}</p>}
+            </span>
         </div>
 
         <div>
-          <label>
-            Altura máxima -
+          <label>Altura máxima: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -107,12 +115,13 @@ export default function CreatedDog() {
               value={input.heightMax}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.heightMax && <p>{errors.heightMax}</p>}
+            </span>
         </div>
 
         <div>
-          <label>
-            Peso mínimo -
+          <label>Peso mínimo: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -120,12 +129,13 @@ export default function CreatedDog() {
               value={input.weightMin}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.weightMin && <p>{errors.weightMin}</p>}
+            </span>
         </div>
 
         <div>
-          <label>
-            Peso máximo -
+          <label>Peso máximo: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -133,12 +143,14 @@ export default function CreatedDog() {
               value={input.weightMax}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.weightMax && <p>{errors.weightMax}</p>}
+            </span>
         </div>
 
         <div>
           <label>
-            Años de vida -
+            Años de vida: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -146,12 +158,13 @@ export default function CreatedDog() {
               value={input.life_span}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.life_span && <p>{errors.life_span}</p>}
+            </span>
         </div>
 
         <div>
-          <label>
-            Imagen -
+          <label>Imagen: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
@@ -159,20 +172,22 @@ export default function CreatedDog() {
               value={input.image}
               required
             />
-          </label>
+            <span className={style.validation}>
+              {errors.image && <p>{errors.image}</p>}
+            </span>
         </div>
 
         <div>
-          <label>
-            Temperamentos -
+          <label>Temperamentos: </label>
             <input
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="temperament"
               value={input.temperament}
             />
-            {errors.temperament && ( <p>{errors.temperament}</p> )}
-          </label>
+            {/*<span className={style.validation}>
+              {errors.life_span && <p>{errors.life_span}</p>}
+            </span>*/}
         </div>
 
         <select onChange={(e) => handleSelect(e)}>
@@ -214,13 +229,13 @@ function validate(input) {
 
   if (!input.life_span) {
     errors.life_span = "Se requiere tiempo de vida";
-  } else if (!input.life_span.includes("years")) {
+  } else if (!input.life_span.includes("años")) {
     errors.life_span = "La edad del perro debe incluir la palabra (años)";
   }
 
   if (!input.image) {
     errors.image = "La URL de la imagen es obligatoria";
-  } else if (!input.image.includes("years")) {
+  } else if (!input.image.includes("https://")) {
     errors.image = "La imagen debe tener una url válida (formato https://)";
   }
 

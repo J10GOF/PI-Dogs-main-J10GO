@@ -1,6 +1,7 @@
 import React from "react";
 import Style from './Card.module.css';
 import { Link } from "react-router-dom";
+//import { useNavigate } from "react-router-dom";
 
 export default function Card({id, name, image, temperament, /*heightMin, heightMax,*/ weightMin, weightMax, life_span}) {
   return (
