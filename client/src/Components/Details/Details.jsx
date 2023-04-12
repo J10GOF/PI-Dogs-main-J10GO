@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getDetails, cleaner } from "../../actions/actions.js";
+import { getDetails } from "../../actions/actions.js";
 import { useParams } from "react-router";
 
 export default function Details() {
@@ -14,14 +14,13 @@ export default function Details() {
   useEffect(() => {
     dispatch(cleaner());
     dispatch(getDetails(id));
-    dispatch(cleaner());
   }, [dispatch, id]);
 
   if (details) {
     return (
       <div>
       <img src={details.image} alt="Not found" />
-        <h2>I am {details.name} </h2>
+        <h2>{details.name} </h2>
         <h5>Min weight: {details.weightMin} </h5>
         <h5>Max weight: {details.weightMax} </h5>
         <h5>Min height: {details.heightMin} </h5>

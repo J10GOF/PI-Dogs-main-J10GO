@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import Card from "../Card/Card.jsx";
 import Paginated from "../Paginado/Paginado.jsx"
 import style from '../Home/Home.module.css';
+import SearchBar from "../SearchBar/SearchBar.jsx";
 
 export default function Filtros() {
   const dispatch = useDispatch();
@@ -57,26 +58,23 @@ export default function Filtros() {
   function handleCreatedDb(e) {
     e.preventDefault();
     dispatch(createdInDb(e.target.value));
-    setCurrentPage(1);
     setOrder(e.target.value);
+    setCurrentPage(1);
   }
 
   return (
     <div>
-      <Link to="/dog">
-        <button>Crear un nuevo perro</button>
-      </Link>
       <div>
         <select onChange={(e) => handerSortAlphabetically(e)} value="disabled">
           <option value="">Orden alfabético</option>
-          <option value="ascendente">A to Z</option>
-          <option value="descendente">Z to A</option>
+          <option value="ascendente">A - Z</option>
+          <option value="descendente">Z - A</option>
         </select>
 
         <select onChange={(e) => handleSortWeight(e)} value="disabled">
           <option value="">Ordenar por peso</option>
-          <option value="weightMin">Min weight</option>
-          <option value="weightMax">Max weight</option>
+          <option value="weightMin">Menos Pesados</option>
+          <option value="weightMax">Mas Pesados</option>
         </select>
 
         <select
@@ -100,11 +98,15 @@ export default function Filtros() {
         </select>
       </div>
 
-      <Paginated
-        dogsPerPage={dogsPerPage}
-        allDogs={allDogs.length}
-        paginated={paginated}
-      />
+      <SearchBar/>
+
+      {allDogs.length > 7 ? (
+        <Paginated
+          dogsPerPage={dogsPerPage}
+          allDogs={allDogs.length}
+          paginated={paginated}
+        />
+      ) : null}
 
       <div className={style.cardsConteiner}>
         {currentDogs?.map((el) => {
@@ -120,10 +122,11 @@ export default function Filtros() {
                 weightMin={el.weightMin}
                 weightMax={el.weightMax}
                 temperament={el.temperament}
+                life_span={el.life_span}
               />
-              <Link to={`/home/${el.id}`}>
+              {/*<Link to={`/home/${el.id}`}>
                 <button>Mas Info</button>
-              </Link>
+              </Link>*/}
             </div>
           );
         })}

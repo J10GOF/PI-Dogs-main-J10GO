@@ -22,6 +22,9 @@ export default function ChargeAllDogs() {
          Renderizar todos los perros
         </button>
       </Link>
+      <Link to="/dog">
+        <button >Crear Perro</button>
+      </Link>
     </div>
   );
 }

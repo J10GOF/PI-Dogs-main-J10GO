@@ -7,6 +7,7 @@ export default function CreatedDog() {
   const dispatch = useDispatch();
   const history = useHistory();
   const temperament = useSelector((state) => state.temperaments);
+  const [errors, setErrors] = useState({});
   const [input, setInput] = useState({
     name: "",
     heightMin: "",
@@ -30,39 +31,37 @@ export default function CreatedDog() {
   }
 
   function handleSubmit(e) {
+    console.log(input.temperament.length);
     e.preventDefault();
-    if (
-      !isNaN(input.heightMin) &&
-      !isNaN(input.heightMax) &&
-      !isNaN(input.weightMin) &&
-      !isNaN(input.weightMax) &&
-      input.life_span.includes("años") &&
-      input.image.includes("https://") &&
-      input.temperament.length !== 0
-      ) {
+    if (Object.values(errors).length === 0 && input.temperament.length !== 0) {
     dispatch(getCreatedDogs(input));
     alert("¡Perro creado con éxito!");
-    setInput({
-      name: "",
-      heightMin: "",
-      heightMax: "",
-      weightMin: "",
-      weightMax: "",
-      life_span: "",
-      image: "",
-      temperament: [],
-    });
     history.push('/home');
     } else {
-      alert("Toda la información sobre el nuevo perro debe estar completa y debe ser válida");
+      alert("Toda la información sobre el nuevo perro debe ser completa y válida, también debe seleccionar un temperamento");
     } 
   }
 
   function handleSelect(e) {
-    setInput({
-      ...input,
-      temperament: [...input.temperament, e.target.value],
-    });
+    if (input.temperament.length < 4) {
+      setInput({
+        ...input,
+        temperament: [...input.temperament, e.target.value],
+      });
+      let temps = input.temperament;
+      let findTemp = temps.indexOf(e.target.value);
+      if (findTemp >= 0) {
+        temps.splice(findTemp, 1);
+      } else {
+        temps.push(e.target.value);
+      }
+      setInput({
+        ...input,
+        temperament: temps,
+      });
+    } else {
+      alert("Solo puedes seleccionar 4 temperamentos");
+    }
   }
 
   return (
@@ -84,6 +83,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Altura mínima -
@@ -96,6 +96,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Altura máxima -
@@ -108,6 +109,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Peso mínimo -
@@ -120,6 +122,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Peso máximo -
@@ -132,6 +135,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Años de vida -
@@ -144,6 +148,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Imagen -
@@ -156,6 +161,7 @@ export default function CreatedDog() {
             />
           </label>
         </div>
+
         <div>
           <label>
             Temperamentos -
@@ -164,10 +170,11 @@ export default function CreatedDog() {
               type="text"
               name="temperament"
               value={input.temperament}
-              required
             />
+            {errors.temperament && ( <p>{errors.temperament}</p> )}
           </label>
         </div>
+
         <select onChange={(e) => handleSelect(e)}>
           {temperament.map((el) => (
             <option value={el.name} key={el.id}>
@@ -175,11 +182,11 @@ export default function CreatedDog() {
             </option>
           ))}
         </select>
-        {/* <ul>
-          <li>{input.temperament.map((el) => el + ", ")}</li>
-        </ul> */}
         <button type="submit">Crear</button>
       </form>
+      <Link to="/home">
+        <button>Atras</button>
+      </Link>
     </div>
   );
 }
@@ -189,6 +196,8 @@ function validate(input) {
   let errors = {};
   if (!input.name) {
     errors.name = "Se requiere el nombre";
+  } else if (!/^[A-Za-zÁÉÍÓÚáéíóúñÑ ]+$/.test(input.name)) {
+    errors.name = "El nombre solo puede contener letras";
   }
 
   if (!input.heightMin) {
@@ -215,7 +224,7 @@ function validate(input) {
     errors.image = "La imagen debe tener una url válida (formato https://)";
   }
 
-  if (!input.temperament) {
+  if (!input.temperament === 0) {
     errors.temperament = "Se requieren temperamentos";
   }
   return errors;
