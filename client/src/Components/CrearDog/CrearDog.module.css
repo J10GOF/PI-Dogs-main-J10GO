@@ -1,0 +1,95 @@
+/* Estilos para el contenedor principal */
+.Crear {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  background-image: url('../../Img/Fondo2.jpg');
+}
+
+/* Estilos para el título */
+.titulo {
+  font-size: 36px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 50px;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+
+/* Estilos para el formulario */
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgba(255,255,255,0.7);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+/* Estilos para los campos de entrada */
+.input {
+  height: 30px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  padding-left: 10px;
+}
+
+/* Estilos para los botones */
+button {
+  height: 40px;
+  width: 100px;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+/* Estilos para el botón "Crear" */
+.crear {
+  background-color: green;
+}
+
+/* Estilos para el botón "Atras" */
+.atras {
+  background-color: gray;
+  margin-right: 20px;
+}
+
+.atras:hover {
+  background-color: #a9a9a9;
+}
+
+/* Estilos para las etiquetas de texto */
+.label {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: black;
+}
+
+/* Estilos para la sección de validación de errores */
+.validation {
+  color: red;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+/* Estilos para la lista desplegable */
+select {
+  height: 30px;
+  width: 250px;
+  border-radius: 5px;
+  border: 1px solid gray;
+  margin-bottom: 20px;
+  padding-left: 10px;
+}

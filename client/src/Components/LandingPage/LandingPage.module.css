@@ -1,0 +1,39 @@
+.div {
+  background-image: url("../../Img/Fondo1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Titulo {
+  font-size: 3rem;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1E90FF;
+  background: rgba(255, 255, 255, 0.5);
+  padding: 0.5rem;
+}
+
+.Boton {
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  border: none;
+  background-color: #1E90FF;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.Boton:hover {
+  transform: translateY(-5px) scale(1.1);
+}
+
+.Boton:active {
+  transform: translateY(-3px) scale(1.05);
+}

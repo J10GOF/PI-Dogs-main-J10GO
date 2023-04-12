@@ -1,0 +1,9 @@
+.divSearchBar {
+  background-color: #82CDBD;
+}
+
+.InputBuscar,
+.Buscar {
+  border: 1px solid ;
+  padding: 8px;
+}

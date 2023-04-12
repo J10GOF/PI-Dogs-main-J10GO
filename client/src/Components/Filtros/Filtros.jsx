@@ -11,7 +11,7 @@ import {
 import { Link } from "react-router-dom";
 import Card from "../Card/Card.jsx";
 import Paginated from "../Paginado/Paginado.jsx"
-import style from '../Home/Home.module.css';
+import style from './Filtros.module.css';
 import SearchBar from "../SearchBar/SearchBar.jsx";
 
 export default function Filtros() {
@@ -63,21 +63,22 @@ export default function Filtros() {
   }
 
   return (
-    <div>
-      <div>
-        <select onChange={(e) => handerSortAlphabetically(e)} value="disabled">
+    <div className={style.contenedor}>
+      <div className={style.contenedor2}>
+        <select className={style.Selector} onChange={(e) => handerSortAlphabetically(e)} value="disabled">
           <option value="">Orden alfabético</option>
           <option value="ascendente">A - Z</option>
           <option value="descendente">Z - A</option>
         </select>
 
-        <select onChange={(e) => handleSortWeight(e)} value="disabled">
+        <select className={style.Selector} onChange={(e) => handleSortWeight(e)} value="disabled">
           <option value="">Ordenar por peso</option>
           <option value="weightMin">Menos Pesados</option>
           <option value="weightMax">Mas Pesados</option>
         </select>
 
-        <select
+        <select 
+          className={style.Selector}
           onChange={(e) => {
             handleTemperament(e);
           }}
@@ -91,7 +92,7 @@ export default function Filtros() {
           ))}
         </select>
 
-        <select onChange={(e) => handleCreatedDb(e)} value="disabled">
+        <select className={style.Selector} onChange={(e) => handleCreatedDb(e)} value="disabled">
           <option value="">App</option>
           <option value="apiDogs">Dogs API</option>
           <option value="dbDogs">Dogs DB</option>

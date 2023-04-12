@@ -1,14 +1,54 @@
 .card {
-    display: relative;
-    background-color: rgb(71, 77, 255);
-    position: relative;
-    font-size: 15px;
-    width: 300px;
-    height: 300px;
-    margin: 5px;
-    border-radius: 10px;
-  }
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+width: 300px;
+height: 400px;
+margin: 20px;
+border-radius: 10px;
+box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.2);
+background-color: white;
+transition: all 0.3s ease-in-out;
+}
 
-h2 {
-    margin-top: 1rem;
- }
+.card:hover {
+transform: scale(1.05);
+box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+}
+
+.TituloCard {
+font-size: 28px;
+font-weight: bold;
+text-align: center;
+margin: 20px 0px;
+}
+
+.Img {
+border-radius: 10px 10px 0px 0px;
+object-fit: cover;
+}
+
+h3 {
+margin: 10px 0px;
+font-size: 18px;
+text-align: center;
+}
+
+button {
+height: 40px;
+width: 120px;
+border-radius: 5px;
+border: none;
+background-color: #00a7e1;
+color: white;
+font-weight: bold;
+font-size: 16px;
+cursor: pointer;
+transition: all 0.2s ease-in-out;
+margin-bottom: 20px;
+}
+
+button:hover {
+background-color: #1a89b5;
+}

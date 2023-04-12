@@ -72,15 +72,16 @@ export default function CreatedDog() {
   }
 
   return (
-    <div>
+    <div className={style.Crear}>
       <Link to="/home">
-        <button>Regresar</button>
+        <button className={style.atras}>Regresar</button>
       </Link>
-      <h1>CREA TU PROPIO PERRO</h1>
-      <form onSubmit={(e) => handleSubmit(e)}>
+      <h1 className={style.titulo}>CREA TU PROPIO PERRO</h1>
+      <form className={style.formulario} onSubmit={(e) => handleSubmit(e)}>
         <div>
-          <label>Nombre: </label>
+          <label className={style.label}>Nombre: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="name"
@@ -93,8 +94,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Altura mínima: </label>
+          <label className={style.label}>Altura mínima: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="heightMin"
@@ -107,8 +109,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Altura máxima: </label>
+          <label className={style.label}>Altura máxima: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="heightMax"
@@ -121,8 +124,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Peso mínimo: </label>
+          <label className={style.label}>Peso mínimo: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="weightMin"
@@ -135,8 +139,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Peso máximo: </label>
+          <label className={style.label}>Peso máximo: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="weightMax"
@@ -149,9 +154,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>
-            Años de vida: </label>
+          <label className={style.label}>Años de vida: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="life_span"
@@ -164,8 +169,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Imagen: </label>
+          <label className={style.label}>Imagen: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="image"
@@ -178,8 +184,9 @@ export default function CreatedDog() {
         </div>
 
         <div>
-          <label>Temperamentos: </label>
+          <label className={style.label}>Temperamentos: </label>
             <input
+              className={style.input}
               onChange={(e) => handleInputChange(e)}
               type="text"
               name="temperament"
@@ -197,10 +204,10 @@ export default function CreatedDog() {
             </option>
           ))}
         </select>
-        <button type="submit">Crear</button>
+        <button type="submit" className={style.crear}>Crear</button>
       </form>
       <Link to="/home">
-        <button>Atras</button>
+        <button className={style.atras}>Atras</button>
       </Link>
     </div>
   );

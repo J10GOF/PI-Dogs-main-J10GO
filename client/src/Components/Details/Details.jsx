@@ -18,20 +18,21 @@ export default function Details() {
   }, [dispatch, id]);
 
   const dogDetails = useSelector((state) => state.details);
-
     return (
-      <div>
+      <div className={style.classDiv}>
+      <div lassName={style.detail}>
         <img className={style.img} src={dogDetails.image} alt="Not Found" />
           <h2 className={style.h2}>{dogDetails.name} </h2>
-          <h5>Minimun height: {dogDetails.heightMin} Cm</h5>
-          <h5>Maximun height: {dogDetails.heightMax} Cm</h5>
-          <h5>Minimun weight: {dogDetails.weightMin} Kg</h5>
-          <h5>Maximun weight: {dogDetails.weightMax} Kg</h5>
-          <h5>Life span: {dogDetails.life_span} Years</h5>
-          <h5>Temperaments: {dogDetails.temperament}</h5>
+          <h5>Altura mínima: {dogDetails.heightMin} Cm</h5>
+          <h5>Altura maxima: {dogDetails.heightMax} Cm</h5>
+          <h5>Peso Minimo: {dogDetails.weightMin} Kg</h5>
+          <h5>Peso Maximo: {dogDetails.weightMax} Kg</h5>
+          <h5>Años de vida: {dogDetails.life_span} años</h5>
+          <h5>Temperamentos: {dogDetails.temperament}</h5>
         <Link to="/home">
-          <button>Atras</button>
+          <button className={style.Boton}>Atras</button>
         </Link>
+      </div>
       </div>
     );
 }
